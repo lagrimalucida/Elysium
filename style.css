@@ -1,0 +1,329 @@
+/* Importando a Fonte Poppins */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o corpo ocupe toda a altura */
+    transition: background-color 0.4s, color 0.4s; /* Transição suave para a mudança de tema */
+    display: flex; /* Habilita o layout flexível para o menu e conteúdo */
+}
+
+/* 4. Paleta de Cores e Temas */
+
+/* Cores Base da Paleta */
+:root {
+    --primary-color: #6E3DD9; /* Roxo principal, inspirado na HBO Max */
+    --secondary-color: #45214A; /* Roxo escuro para detalhes */
+    --accent-color: #f7b731; /* Cor de destaque (opcional para botões) */
+    --text-light: #ffffff; /* Texto claro */
+    --text-dark: #000000; /* Texto escuro */
+}
+
+/* Tema DARK */
+.dark-theme {
+    --bg-main: #07070D; /* Fundo principal escuro */
+    --bg-card: #1c1c2e; /* Fundo de cards/elementos */
+    --bg-sidebar: #0e0e1a; /* Fundo da barra lateral */
+    --text-color: var(--text-light);
+    --hover-color: var(--primary-color);
+}
+
+/* Tema LIGHT */
+.light-theme {
+    --bg-main: #f0f0f5;
+    --bg-card: #ffffff;
+    --bg-sidebar: #ffffff;
+    --text-color: var(--text-dark);
+    --hover-color: var(--secondary-color);
+}
+
+/* 2. Responsividade e Layout Principal */
+
+/* Sidebar - Menu Lateral */
+#sidebar {
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    color: var(--text-color);
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Fixa o menu lateral */
+    height: 100%;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out; /* Para animação mobile */
+}
+
+.logo {
+    font-weight: 700; /* Poppins Bold */
+    font-size: 1.8em;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+#sidebar ul li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 300; /* Poppins Light */
+    transition: background-color 0.3s, color 0.3s; /* 3. Animação suave */
+}
+
+#sidebar ul li a:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    width: 20px; /* Garante alinhamento dos ícones */
+    text-align: center;
+}
+
+/* Conteúdo Principal */
+#content {
+    flex-grow: 1;
+    margin-left: 250px; /* Espaço para a sidebar fixa */
+    background-color: var(--bg-main);
+    color: var(--text-color);
+    padding: 20px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease-in-out; /* Para animação mobile */
+}
+
+#content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.btn-login-guest {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+}
+
+.btn-login-guest:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Seções de Conteúdo (Animação de Redirecionamento) */
+.hidden-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.active-section {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 0.5s ease-in-out; /* 3. Animação de redirecionamento */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Grid de Conteúdo (Filmes/Séries) */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.media-card {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.media-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.media-card h3, .media-card p {
+    padding: 0 10px;
+    margin: 5px 0;
+}
+
+.media-card p {
+    font-size: 0.8em;
+    color: #aaa;
+    padding-bottom: 10px;
+}
+
+/* 5. Estilo do Player Sobreposto (Modal) */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95); /* Fundo escuro semi-transparente */
+}
+
+.modal-content {
+    background-color: #000;
+    margin: 5% auto; /* 5% do topo e centralizado */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px; /* Largura máxima do player */
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    z-index: 2001;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.video-player {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Alternador de Tema (Theme Switch) */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto; /* Empurra para o final da sidebar */
+    padding: 20px 0;
+    border-top: 1px solid var(--secondary-color);
+}
+
+.theme-switch-wrapper span {
+    margin-right: 10px;
+}
+
+.switch-label {
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#theme-switch {
+    display: none;
+}
+
+.switch-label::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--text-light);
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+#theme-switch:checked + .switch-label {
+    background-color: var(--primary-color); /* Roxo quando Dark (checado) */
+}
+
+#theme-switch:checked + .switch-label::after {
+    transform: translateX(24px); /* Move para a direita no tema Dark */
+    background-color: #fff;
+}
+
+
+/* 2. Responsividade */
+
+.mobile-only {
+    display: none; /* Esconde o botão de toggle em desktops */
+}
+
+/* Para telas menores que 768px (Tablets e Smartphones) */
+@media (max-width: 768px) {
+    /* Menu lateral */
+    #sidebar {
+        width: 200px; /* Largura menor no mobile */
+        transform: translateX(-200px); /* Esconde o menu fora da tela */
+    }
+
+    /* Mostrar a sidebar quando a classe 'active' for adicionada pelo JS */
+    #sidebar.active {
+        transform: translateX(0);
+    }
+    
+    /* Conteúdo principal ocupa 100% da largura, sem margem */
+    #content {
+        margin-left: 0; 
+        width: 100%;
+    }
+
+    /* Traz o botão de menu de volta no mobile */
+    .mobile-only {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.5em;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    /* Ajuste para o cabeçalho no mobile */
+    #content header h1 {
+        font-size: 1.2em;
+        margin-right: auto; /* Empurra o botão de login */
+    }
+    
+    .btn-login-guest {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysium | Acesso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="login_style.css"> </head>
+<body class="dark-theme login-body"> <div class="login-container">
+        <h1 class="logo">Elysium</h1>
+        
+        <div id="auth-box" class="auth-box">
+
+            <form id="login-form">
+                <h2>Entrar</h2>
+                
+                <div class="input-group">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" required placeholder="seu@email.com" autocomplete="email">
+                </div>
+                
+                <div class="input-group">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                
+                <button type="submit" class="btn-primary">Acessar Minha Conta</button>
+                
+                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                
+                <p class="switch-mode">
+                    Não tem conta? 
+                    <a href="#" id="show-register">Cadastre-se Agora</a>
+                </p>
+                
+                <div class="divider"><span>ou</span></div>
+                
+                <a href="index.html" class="btn-secondary">
+                    Continuar como Convidado
+                </a>
+            </form>
+
+            <form id="register-form" class="hidden">
+                <h2>Criar Conta</h2>
+                
+                <div class="input-group">
+                    <label for="register-name">Nome de Usuário</label>
+                    <input type="text" id="register-name" required placeholder="Seu nome" autocomplete="username">
+                </div>
+                
+                <div class="input-group">
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" required placeholder="seu@email.com" autocomplete="email">
+                </div>
+                
+                <div class="input-group">
+                    <label for="register-password">Senha</label>
+                    <input type="password" id="register-password" required placeholder="Mínimo 6 caracteres">
+                </div>
+                
+                <button type="submit" class="btn-primary">Criar Conta</button>
+                
+                <p class="switch-mode">
+                    Já tem conta? 
+                    <a href="#" id="show-login">Fazer Login</a>
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="login_script.js"></script>
+</body>
+</html>
